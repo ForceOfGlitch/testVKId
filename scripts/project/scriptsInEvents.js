@@ -15,7 +15,6 @@ const scriptsInEvents = {
 				apiId: 51693034
 			});
 			
-			VK.Api.call('users.get', { user_ids: 210700286, fields: 'bdate' }, function(r)	{
 		   	VK.Auth.login(
 		      // callback-функция, которая будет вызвана после авторизации
 		      function (response) {
@@ -51,7 +50,6 @@ const scriptsInEvents = {
 		      // WIKI:128
 		      VK.access.PHOTOS
 		    );
-		   });
 		}
 	}
 

@@ -10,11 +10,20 @@ const scriptsInEvents = {
 		document.head.appendChild(path);
 		
 		path.onload = function() {
-			console.log(123);
 			
 			VK.init({
 				apiId: 51693034
 			});
+			
+			function authInfo(response) {
+			  if (response.session) {
+				  console.log(response.session.mid);
+				  console.log("log response ended");
+			  }
+			}
+			
+			VK.Auth.getLoginStatus(authInfo);
+			VK.Auth.login(authInfo);
 			
 			VK.api("account.getProfileInfo", function (data) {
 		    	alert("Info: " + data.first_name + " " + data.last_name + " " + data.id);
@@ -23,6 +32,7 @@ const scriptsInEvents = {
 					data.last_name + " " + 
 					data.id);
 		    	returnStr = data.id;
+				console.log("api word is end here");
 			});
 		}
 	}

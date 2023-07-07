@@ -3848,7 +3848,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.AJAX,
 		C3.Plugins.Browser,
 		C3.Plugins.System.Cnds.OnLayoutStart,
-		C3.ScriptsInEvents.EventSheet1_Event2_Act1
+		C3.Plugins.Browser.Acts.ConsoleLog
 	];
 };
 self.C3_JsPropNameTable = [
@@ -3954,7 +3954,7 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-
+		() => "testHTML"
 ];
 
 

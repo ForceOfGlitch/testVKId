@@ -19,6 +19,28 @@
 </head>
 <body>
 
+<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+<script>
+vkBridge.send('VKWebAppInit');
+vkBridge.subscribe((e) => console.log(e)); 
+    
+console.log(222)
+
+vkBridge.send("VKWebAppInit", {});      
+    
+vkBridge.send('VKWebAppGetLaunchParams')
+  .then((data) => { 
+    if (data.vk_app_id) {
+      // Параметры запуска получены
+	  console.log(data.vk_app_id)
+    }
+  })
+  .catch((error) => {
+    // Ошибка
+    console.log(error);
+  });
+</script>
+
 <script>
 if (location.protocol.substr(0, 4) === "file")
 {

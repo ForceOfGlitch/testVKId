@@ -7,14 +7,13 @@
 
 <meta name="generator" content="Scirra Construct">
 
-	<link rel="manifest" href="appmanifest.json">
-	<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
-	<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
-	<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
-	<link rel="icon" type="image/png" href="icons/icon-512.png">
+<link rel="manifest" href="appmanifest.json">
+<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128.png">
+<link rel="apple-touch-icon" sizes="256x256" href="icons/icon-256.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
+<link rel="icon" type="image/png" href="icons/icon-512.png">
 
 <link rel="stylesheet" href="style.css">
-
 
 </head>
 <body>
@@ -22,42 +21,61 @@
 <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
 <script>
 vkBridge.send('VKWebAppInit');
-vkBridge.subscribe((e) => console.log(e)); 
-    
+vkBridge.subscribe((e) => console.log(e));
+
 console.log(222)
 
-vkBridge.send("VKWebAppInit", {});      
-    
+vkBridge.send("VKWebAppInit", {});
+
 vkBridge.send('VKWebAppGetLaunchParams')
-  .then((data) => { 
-    if (data.vk_app_id) {
-      // Параметры запуска получены
-	  console.log(data.vk_app_id)
-    }
-  })
-  .catch((error) => {
-    // Ошибка
-    console.log(error);
-  });
+.then((data) => {
+if (data.vk_user_id) {
+// Параметры запуска получены
+console.log(data.vk_user_id)
+const request = new XMLHttpRequest();
+
+const url = "https://www.tablequiz.ru/vk_id_script.php";
+
+const params = "id=" + data.vk_user_id;
+
+request.open("POST", url, true);
+
+request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+request.addEventListener("readystatechange", () => {
+
+if(request.readyState === 4 && request.status === 200) {
+console.log(request.responseText);
+}
+});
+
+request.send(params);
+console.log("SEND")
+}
+})
+.catch((error) => {
+// Ошибка
+console.log(error);
+});
 </script>
 
 <script>
 if (location.protocol.substr(0, 4) === "file")
 {
-	alert("Web exports won't work until you upload them. (When running on the file: protocol, browsers block many features from working for security reasons.)");
+alert("Web exports won't work until you upload them. (When running on the file: protocol, browsers block many features from working for security reasons.)");
 }
 </script>
 
-	<noscript>
-		<div id="notSupportedWrap">
-			<h2 id="notSupportedTitle">This content requires JavaScript</h2>
-			<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
-		</div>
-	</noscript>
-	<script src="scripts/supportcheck.js"></script>
-	<script src="scripts/offlineclient.js" type="module"></script>
-	<script src="scripts/main.js" type="module"></script>
-	<script src="scripts/register-sw.js" type="module"></script>
+<noscript>
+<div id="notSupportedWrap">
+<h2 id="notSupportedTitle">This content requires JavaScript</h2>
+<p class="notSupportedMessage">JavaScript appears to be disabled. Please enable it to view this content.</p>
+</div>
+</noscript>
+<script src="scripts/supportcheck.js"></script>
+<script src="scripts/offlineclient.js" type="module"></script>
+<script src="scripts/main.js" type="module"></script>
+<script src="scripts/register-sw.js" type="module"></script>
 
 </body>
 </html>
